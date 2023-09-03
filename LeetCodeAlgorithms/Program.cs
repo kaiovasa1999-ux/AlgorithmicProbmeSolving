@@ -1,20 +1,39 @@
-﻿namespace LeetCodeAlgorithms
+﻿using System.Globalization;
+
+namespace LeetCodeAlgorithms
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(IsNumber("0"));
+            int[] arr1 = { 1, 2, };
+            int[] arr2 = { 3, 4 };
+            var x= MedianOfTwoSortedArrays(arr1, arr2);
+            Console.WriteLine(x);
         }
-        public static bool IsNumber(string s)
+        
+        private static decimal MedianOfTwoSortedArrays(int[] arr1, int[] arr2)
         {
-            if (s == "Infinity" || s == "-Infinity" || s == "+Infinity") return false;
-            double o;
-            if (double.TryParse(s, out o))
+            decimal res = 0;
+            Array.Sort(arr1);
+            Array.Sort(arr1);
+            var bigNum1 = arr1[0];
+            var bigNum2 = arr2[0];
+            Array.Sort(arr2);
+            int totalSum = 0;
+            int[] mergeNums = arr1.Concat(arr2).ToArray();
+            //if(mergeNums.Length % 2 == 0)
+            //{
+            //    res = mergeNums[mergeNums.Length / 2] + me;
+            //}
+
+            for (int i = 0; i < mergeNums.Length; i++)
             {
-                return !Double.IsNaN(o);
+                totalSum += mergeNums[i];
             }
-            return false;
+            res = totalSum / mergeNums.Length;
+
+            return res;
         }
 
     }
